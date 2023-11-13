@@ -6,6 +6,7 @@ import {dark} from "@clerk/themes";
 
 import { ThemeProvider } from "@/components/ui/providers/theme-provider";
 import { cn } from "@/lib/utils";
+import { ModalProvider } from "@/components/ui/providers/modal-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           <ThemeProvider 
           
           attribute="class" defaultTheme="dark" enableSystem={false} storageKey="discord-theme" >
+            <ModalProvider />
           {children}
           </ThemeProvider>
           </body>
