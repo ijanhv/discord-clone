@@ -20,21 +20,22 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
 import FileUpload from "../file-upload";
+import { apiUrl } from "@/lib/url";
 
 const formSchema = z.object({
   name: z.string().min(1, {
-    message: "Server name is required."
+    message: "Server name is required.",
   }),
   imageUrl: z.string().min(1, {
-    message: "Server image is required."
-  })
+    message: "Server image is required.",
+  }),
 });
 
 const InitialModal = () => {
@@ -51,14 +52,14 @@ const InitialModal = () => {
     defaultValues: {
       name: "",
       imageUrl: "",
-    }
+    },
   });
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/servers", values);
+      await axios.post(`/api/servers`, values);
 
       form.reset();
       router.refresh();
@@ -66,7 +67,7 @@ const InitialModal = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   if (!isMounted) {
     return null;
@@ -80,7 +81,8 @@ const InitialModal = () => {
             Customize your server
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Give your server a personality with a name and an image. You can always change it later.
+            Give your server a personality with a name and an image. You can
+            always change it later.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -109,9 +111,7 @@ const InitialModal = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                    >
+                    <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
                       Server name
                     </FormLabel>
                     <FormControl>
@@ -136,7 +136,7 @@ const InitialModal = () => {
         </Form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
 export default InitialModal;
