@@ -28,7 +28,7 @@ export default function RootLayout({
         )}>
           <ThemeProvider 
           
-          attribute="class" defaultTheme="dark" enableSystem={false} storageKey="discord-theme" forcedTheme="dark">
+          attribute="class" defaultTheme="dark" enableSystem={false} storageKey="discord-theme" >
           {children}
           </ThemeProvider>
           </body>
